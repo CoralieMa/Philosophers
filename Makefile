@@ -14,6 +14,7 @@ SRCS_PHILO:= philo \
 				verification_input \
 				ft_atoi \
 				threads \
+				routine \
 				initialise
 
 SRCS:=	${addprefix ${SRCS_DIR}/, ${addsuffix .c, ${SRCS_PHILO}}}
