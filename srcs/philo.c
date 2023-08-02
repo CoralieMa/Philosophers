@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 11:20:25 by cmartino          #+#    #+#             */
-/*   Updated: 2023/07/26 11:00:09 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/02 14:18:02 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 int	main(int argc, char **argv)
 {
+	t_philo	*philos;
 	t_infos	infos;
 
 	if (input_not_valid(argc, argv) != 1)
 		return (0);
-	infos = initialise_data(argc, argv);
-	if (infos.valid_infos == -1)
+	philos = initialise_data(argc, argv, &infos);
+	if (philos[0].infos->valid_infos == -1)
 		return (error_msg(3, "input not valid", 0));
-	if (initialise_philo(&infos) < 0)
-		return (error_msg(4, "malloc error", 0));
-	ft_thread(&infos);
-	free(infos.philo);
+	ft_thread(philos, philos[0].infos->number_of_philosophers);
+	//free + mutex_destroy
 	return (0);
 }

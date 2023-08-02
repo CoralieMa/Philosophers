@@ -6,11 +6,11 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:27:53 by cmartino          #+#    #+#             */
-/*   Updated: 2023/07/10 10:40:14 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/02 14:16:08 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	ft_atoi(const char *str)
 {
