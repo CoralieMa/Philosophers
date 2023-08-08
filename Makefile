@@ -1,56 +1,40 @@
-.DELETE_ON_ERROR:
-.SILENT:
+NAME	= philo
 
-COLOR_RESET = \033[0m
-COLOR_GREEN = \033[32m
-
-NAME:= philo
-
-BUILD_DIR:= build
-SRCS_DIR:= srcs
-INC_DIR:= includes
-
-SRCS_PHILO:= philo \
-				verification_input \
+FILES	= philo \
+				utils \
+				mutex \
 				ft_atoi \
+				ft_time \
 				threads \
 				routine \
-				initialise
+				initialise \
+				verification_input \
 
-SRCS:=	${addprefix ${SRCS_DIR}/, ${addsuffix .c, ${SRCS_PHILO}}}
 
-OBJS:=	${SRCS:%.c=${BUILD_DIR}/%.o}
+SRCS	= ${addprefix SRCS/, $(addsuffix .c, $(FILES))}
 
-DEPS:=	${OBJS:.o=.d}
+OBJS	= ${SRCS:.c=.o}
 
-CFLAGS:= -Wall -Wextra -Werror -Wuninitialized -Winit-self -Wshadow -Wdouble-promotion -Wundef -fno-common -Wconversion -g3 -O3
+CC 		= gcc
 
-SANITIZE:= -fsanitize=address -g3 -O3 -fno-omit-frame-pointer
+CFLAGS	= -Wall -Wextra -Werror #-fsanitize=address -g
 
-CPPFLAGS:= ${addprefix -I,${INC_DIR}} -MMD -MP
+RM		= rm -f
 
-RM:=	rm -rf
+.c.o:
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-all: ${NAME}
+all :	${NAME}
 
-${NAME}: ${OBJS}
-	${CC} ${OBJS} ${SANITIZE} -o $@
-	echo "$(COLOR_GREEN)Compilation completed.$(COLOR_RESET)"
-
-${BUILD_DIR}/%.o: %.c
-	mkdir -p $(dir $@)
-	$(CC) $(CPPFLAGS) ${CFLAGS} ${SANITIZE} -c $< -o $@
+${NAME}:	${OBJS}
+		${CC} ${CFLAGS} ${OBJS} -o ${NAME}
 
 clean:
-	${RM} ${BUILD_DIR}
-	echo "$(COLOR_GREEN)objects cleaned.$(COLOR_RESET)"
+	${RM} ${OBJS}
 
-fclean: clean
+fclean:	clean
 	${RM} ${NAME}
-	echo "$(COLOR_GREEN)executables cleaned.$(COLOR_RESET)"
 
-re: fclean all
+re:	fclean all
 
 .PHONY:	all clean fclean re
-
--include ${DEPS}
