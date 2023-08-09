@@ -6,13 +6,13 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:23:41 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/03 16:32:23 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/09 09:24:00 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	ft_strlen(const char *s)
+static int	ft_strlen(const char *s)
 {
 	int	len;
 

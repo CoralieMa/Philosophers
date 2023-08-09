@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:36:53 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/02 13:56:57 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/09 11:16:41 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static t_philo	*initialise_philo(t_infos *infos)
 	int		i;
 	t_philo	*philo;
 
+	if (infos->number_of_philosophers == 0)
+		return (NULL);
 	philo = malloc (sizeof(t_philo) * (size_t)infos->number_of_philosophers);
 	if (!philo)
 		return (NULL);
@@ -26,6 +28,7 @@ static t_philo	*initialise_philo(t_infos *infos)
 		philo[i].philo_nb = i;
 		philo[i].philo_status = THINK;
 		philo[i].infos = infos;
+		philo[i].nb_meal = 0;
 		++i;
 	}
 	return (philo);
@@ -49,8 +52,7 @@ static void	initialise_forks(t_infos *infos, int nb_philos)
 t_philo	*initialise_data(int argc, char **argv, t_infos *infos)
 {
 	infos->valid_infos = 0;
-	infos->start_sec = 0;
-	infos->start_msec = 0;
+	infos->begin_time = 0;
 	infos->number_of_philosophers = ft_atoi(argv[1]);
 	infos->time_to_die = (useconds_t)ft_atoi(argv[2]);
 	infos->time_to_eat = (useconds_t)ft_atoi(argv[3]);
