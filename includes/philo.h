@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 11:20:39 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/14 13:33:34 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:45:19 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <pthread.h>
 # include <limits.h>
 # include <sys/time.h>
+# include <stdatomic.h>
 
 # define DEAD 0
 # define SLEEP 1
@@ -72,7 +73,6 @@ void	taking_forks(t_philo *philo, t_infos *infos);
 void	returning_fork(t_philo *philo, t_infos *infos);
 void	print_msg(t_philo *philo, t_infos *infos, char *msg);
 t_philo	*initialise_data(int argc, char **argv, t_infos *infos);
-
 long	get_last_time(void);
 
 #endif
