@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:13:33 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/14 13:30:42 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:33:47 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	eating(t_philo *philo, t_infos *infos)
 		return ;
 	print_msg(philo, infos, "is eating\n");
 	philo->time_last_meal = get_time(infos);
-	// printf("last meal n.%d= %ld\n",philo->philo_nb + 1, philo->time_last_meal);
 	ft_msleep(philo, infos, infos->time_to_eat);
 	philo->nb_meal += 1;
 	philo->philo_status = SLEEP;

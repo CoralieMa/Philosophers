@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:37:03 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/14 13:27:10 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:35:32 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	verification_dead(t_philo *philo, t_infos *infos, int a)
 	{
 		infos->valid_infos = 1;
 		unlock_forks(infos);
-		printf("%ld ms %d %s ->%d", get_time(infos), philo->philo_nb + 1, "died\n", a);
+		printf("%ld ms %d %s", get_time(infos), philo->philo_nb + 1, "died\n");
 		philo->philo_status = DEAD;
-		// (void)a;
+		(void)a;
 		return (1);
 	}
 	pthread_mutex_unlock(&(infos->check_last_meal));
@@ -73,7 +73,6 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	infos = philo->infos;
-	philo->infos->test = 8;
 	if (philo->infos->number_of_philosophers < 2)
 		return (exeption(philo, infos));
 	if (philo->philo_nb % 2 != 0)

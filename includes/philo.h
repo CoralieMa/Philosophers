@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 11:20:39 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/14 13:22:50 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:33:34 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,15 @@ typedef struct s_infos
 	pthread_mutex_t				*forks;
 	pthread_mutex_t				msg;
 	pthread_mutex_t				check_last_meal;
-	int							test;
 }				t_infos;
 
 typedef struct s_philo
 {
-	int		philo_nb;
-	int		philo_status;
-	int		nb_meal;
+	int				philo_nb;
+	int				philo_status;
+	int				nb_meal;
 	_Atomic long	time_last_meal;
-	t_infos	*infos;
+	t_infos			*infos;
 }				t_philo;
 
 int		ft_isdigit(char c);

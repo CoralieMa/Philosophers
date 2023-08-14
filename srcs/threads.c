@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 14:53:26 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/14 13:30:24 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:35:19 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static void	loop_last_meal(t_philo *philo, t_infos *infos, int nb_philos)
 		{
 			if (get_time(infos) - philo[i].time_last_meal >= infos->time_to_die)
 			{
-				// printf("n. %d -> %ld\n",philo[i].philo_nb + 1, philo[i].time_last_meal);
-				// printf("nb meal = %d\n", philo[i].nb_meal);
 				infos->valid_infos = 1;
 				philo_died(philo, infos);
 			}
@@ -47,7 +45,6 @@ static int	init_thread(t_philo *philo, int nb_philos, pthread_t *philo_thread)
 
 	i = 0;
 	get_time_beginning(philo[0].infos);
-	philo[0].infos->test = 0;
 	while (i < nb_philos)
 	{
 		if (pthread_create(&philo_thread[i], NULL, &routine, &(philo[i])) != 0)
@@ -62,7 +59,6 @@ static int	init_thread(t_philo *philo, int nb_philos, pthread_t *philo_thread)
 			return (1);
 		++i;
 	}
-	// printf("-> %d\n", philo[0].infos->test);
 	return (0);
 }
 
