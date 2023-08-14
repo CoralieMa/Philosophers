@@ -6,11 +6,23 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 11:01:45 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/08 14:43:04 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/14 09:50:41 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	unlock_forks(t_infos *infos)
+{
+	int	i;
+
+	i = 0;
+	while (i < infos->number_of_philosophers)
+	{
+		pthread_mutex_unlock(&infos->forks[i]);
+		++i;
+	}
+}
 
 void	ft_pthread_mutex_destroy(t_infos *infos)
 {

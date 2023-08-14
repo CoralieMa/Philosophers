@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 11:20:25 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/09 10:24:59 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:30:59 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	main(int argc, char **argv)
 	if (philos[0].infos->valid_infos == -1)
 		return (error_msg(3, "input not valid", 0));
 	ft_thread(philos, philos[0].infos->number_of_philosophers);
-	//free
+	ft_free_struct(&infos, philos);
 	return (0);
 }

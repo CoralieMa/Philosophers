@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:36:53 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/09 11:16:41 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/14 10:19:43 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_philo	*initialise_philo(t_infos *infos)
 		philo[i].philo_status = THINK;
 		philo[i].infos = infos;
 		philo[i].nb_meal = 0;
+		philo[i].time_last_meal = 0;
 		++i;
 	}
 	return (philo);

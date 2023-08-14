@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 11:20:39 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/09 14:30:06 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:22:50 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_infos
 	useconds_t					time_to_sleep;
 	pthread_mutex_t				*forks;
 	pthread_mutex_t				msg;
+	pthread_mutex_t				check_last_meal;
+	int							test;
 }				t_infos;
 
 typedef struct s_philo
@@ -45,7 +47,7 @@ typedef struct s_philo
 	int		philo_nb;
 	int		philo_status;
 	int		nb_meal;
-	long	time_last_meal;
+	_Atomic long	time_last_meal;
 	t_infos	*infos;
 }				t_philo;
 
@@ -57,10 +59,12 @@ int		ft_thread(t_philo *philo, int nb_philos);
 int		verification_dead(t_philo *philo, t_infos *infos, int a);
 long	get_time(t_infos *infos);
 void	ft_msleep(t_philo *philo, t_infos *infos, int ms);
+void	unlock_forks(t_infos *infos);
 void	*routine(void *arg);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	get_time_beginning(t_infos *infos);
+void	ft_free_struct(t_infos *infos, t_philo *philos);
 void	ft_pthread_mutex_init(t_infos *infos);
 void	eating(t_philo *philo, t_infos *infos);
 void	sleeping(t_philo *philo, t_infos *infos);
@@ -69,5 +73,7 @@ void	taking_forks(t_philo *philo, t_infos *infos);
 void	returning_fork(t_philo *philo, t_infos *infos);
 void	print_msg(t_philo *philo, t_infos *infos, char *msg);
 t_philo	*initialise_data(int argc, char **argv, t_infos *infos);
+
+long	get_last_time(void);
 
 #endif
