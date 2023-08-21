@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:36:53 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/14 10:19:43 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/16 09:13:24 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	initialise_forks(t_infos *infos, int nb_philos)
 	int	i;
 
 	i = 0;
-	infos->forks = malloc(sizeof(pthread_mutex_t) * (size_t)(nb_philos + 1));
+	infos->forks = malloc(sizeof(pthread_mutex_t) * (size_t)(nb_philos));
 	if (!infos->forks)
 		infos->valid_infos = -2;
 	while (i < infos->number_of_philosophers)

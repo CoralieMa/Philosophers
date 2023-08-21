@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:24:50 by cmartino          #+#    #+#             */
-/*   Updated: 2023/07/10 11:16:49 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/21 08:11:22 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*wich_arg(int i)
 int	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
-}	
+}
 
 int	error_msg(int type, char *msg, int i)
 {

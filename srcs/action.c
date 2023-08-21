@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:13:33 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/14 13:33:47 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/16 09:26:29 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	returning_fork(t_philo *philo, t_infos *infos)
 
 void	sleeping(t_philo *philo, t_infos *infos)
 {
-	if (verification_dead(philo, infos, 4) != 0)
+	if (verification_dead(philo, infos) != 0)
 		return ;
 	print_msg(philo, infos, "is sleeping\n");
 	ft_msleep(philo, infos, infos->time_to_sleep);
-	if (verification_dead(philo, infos, 40) != 0)
+	if (verification_dead(philo, infos) != 0)
 		return ;
 	print_msg(philo, infos, "is thinking\n");
 	philo->philo_status = THINK;
@@ -35,7 +35,7 @@ void	sleeping(t_philo *philo, t_infos *infos)
 
 void	eating(t_philo *philo, t_infos *infos)
 {
-	if (verification_dead(philo, infos, 4) != 0)
+	if (verification_dead(philo, infos) != 0)
 		return ;
 	print_msg(philo, infos, "is eating\n");
 	philo->time_last_meal = get_time(infos);
@@ -49,14 +49,14 @@ void	eating(t_philo *philo, t_infos *infos)
 void	taking_forks(t_philo *philo, t_infos *infos)
 {
 	pthread_mutex_lock(&(infos->forks[philo->philo_nb]));
-	if (verification_dead(philo, infos, 51) != 0)
+	if (verification_dead(philo, infos) != 0)
 		return ;
 	print_msg(philo, infos, "has taken a fork\n");
 	if ((infos->number_of_philosophers -1) != philo->philo_nb)
 		pthread_mutex_lock(&(infos->forks[philo->philo_nb + 1]));
 	else
 		pthread_mutex_lock(&(infos->forks[0]));
-	if (verification_dead(philo, infos, 52) != 0)
+	if (verification_dead(philo, infos) != 0)
 		return ;
 	print_msg(philo, infos, "has taken a fork\n");
 }

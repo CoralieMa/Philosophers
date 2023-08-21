@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:37:03 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/14 13:35:32 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/16 09:29:46 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_msg(t_philo *philo, t_infos *infos, char *msg)
 	pthread_mutex_unlock(&(infos->msg));
 }
 
-int	verification_dead(t_philo *philo, t_infos *infos, int a)
+int	verification_dead(t_philo *philo, t_infos *infos)
 {
 	if (infos->valid_infos != 0)
 		return (1);
@@ -31,7 +31,6 @@ int	verification_dead(t_philo *philo, t_infos *infos, int a)
 		unlock_forks(infos);
 		printf("%ld ms %d %s", get_time(infos), philo->philo_nb + 1, "died\n");
 		philo->philo_status = DEAD;
-		(void)a;
 		return (1);
 	}
 	pthread_mutex_unlock(&(infos->check_last_meal));
@@ -52,7 +51,7 @@ static void	*exeption(t_philo *philo, t_infos *infos)
 
 void	loop_routine(t_philo *philo, t_infos *infos)
 {
-	if (verification_dead(philo, infos, 10000) == 0
+	if (verification_dead(philo, infos) == 0
 		|| philo->nb_meal == infos->number_of_times_each_philosopher_must_eat)
 	{
 		taking_forks(philo, infos);
