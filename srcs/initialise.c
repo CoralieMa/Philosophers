@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:36:53 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/16 09:13:24 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:10:29 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ static t_philo	*initialise_philo(t_infos *infos)
 		return (NULL);
 	philo = malloc (sizeof(t_philo) * (size_t)infos->number_of_philosophers);
 	if (!philo)
+	{
+		free(infos->forks);
+		printf("malloc error\n");
 		return (NULL);
+	}
 	i = 0;
 	while (i < infos->number_of_philosophers)
 	{
@@ -43,11 +47,6 @@ static void	initialise_forks(t_infos *infos, int nb_philos)
 	infos->forks = malloc(sizeof(pthread_mutex_t) * (size_t)(nb_philos));
 	if (!infos->forks)
 		infos->valid_infos = -2;
-	while (i < infos->number_of_philosophers)
-	{
-		pthread_mutex_init(infos->forks, NULL);
-		++i;
-	}
 }
 
 t_philo	*initialise_data(int argc, char **argv, t_infos *infos)
@@ -58,11 +57,13 @@ t_philo	*initialise_data(int argc, char **argv, t_infos *infos)
 	infos->time_to_die = (useconds_t)ft_atoi(argv[2]);
 	infos->time_to_eat = (useconds_t)ft_atoi(argv[3]);
 	infos->time_to_sleep = (useconds_t)ft_atoi(argv[4]);
-	if (infos->number_of_philosophers < 0 || infos->time_to_die < 0
-		|| infos->time_to_eat < 0 || infos->time_to_sleep < 0)
+	if (infos->number_of_philosophers < 0 || (int)infos->time_to_die < 0
+		|| (int)infos->time_to_eat < 0 || (int)infos->time_to_sleep < 0)
 		infos->valid_infos = -1;
 	else
 		initialise_forks(infos, infos->number_of_philosophers);
+	if (infos->valid_infos == -2)
+		return (NULL);
 	if (argc == 6)
 	{
 		infos->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
