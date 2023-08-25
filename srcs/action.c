@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:13:33 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/16 09:26:29 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:48:22 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sleeping(t_philo *philo, t_infos *infos)
 	if (verification_dead(philo, infos) != 0)
 		return ;
 	print_msg(philo, infos, "is sleeping\n");
-	ft_msleep(philo, infos, infos->time_to_sleep);
+	ft_msleep(infos, infos->time_to_sleep);
 	if (verification_dead(philo, infos) != 0)
 		return ;
 	print_msg(philo, infos, "is thinking\n");
@@ -39,7 +39,7 @@ void	eating(t_philo *philo, t_infos *infos)
 		return ;
 	print_msg(philo, infos, "is eating\n");
 	philo->time_last_meal = get_time(infos);
-	ft_msleep(philo, infos, infos->time_to_eat);
+	ft_msleep(infos, infos->time_to_eat);
 	philo->nb_meal += 1;
 	philo->philo_status = SLEEP;
 	if (philo->nb_meal == infos->number_of_times_each_philosopher_must_eat)
@@ -52,7 +52,7 @@ void	taking_forks(t_philo *philo, t_infos *infos)
 	if (verification_dead(philo, infos) != 0)
 		return ;
 	print_msg(philo, infos, "has taken a fork\n");
-	if ((infos->number_of_philosophers -1) != philo->philo_nb)
+	if ((infos->number_of_philosophers - 1) != philo->philo_nb)
 		pthread_mutex_lock(&(infos->forks[philo->philo_nb + 1]));
 	else
 		pthread_mutex_lock(&(infos->forks[0]));

@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 11:20:39 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/25 11:31:08 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:14:22 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 typedef struct s_infos
 {
 	atomic_int					valid_infos;
+	atomic_int					nb_tot_meal;
 	int							infos_ft;
 	int							number_of_philosophers;
 	int							number_of_times_each_philosopher_must_eat;
@@ -73,7 +74,7 @@ void	pthread_join_error(t_infos *infos, int i);
 void	taking_forks(t_philo *philo, t_infos *infos);
 void	returning_fork(t_philo *philo, t_infos *infos);
 void	ft_free_struct(t_infos *infos, t_philo *philos);
-void	ft_msleep(t_philo *philo, t_infos *infos, int ms);
+void	ft_msleep(t_infos *infos, int ms);
 void	print_msg(t_philo *philo, t_infos *infos, char *msg);
 void	*routine(void *arg);
 t_philo	*initialise_data(int argc, char **argv, t_infos *infos);

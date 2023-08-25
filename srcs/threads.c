@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 14:53:26 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/25 11:32:41 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:30:49 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ static void	loop_last_meal(t_philo *philo, t_infos *infos, int nb_philos)
 {
 	int	i;
 
-	while (infos->valid_infos == 0 && nb_philos != 0)
+	while (!(infos->valid_infos == 1 || infos->nb_tot_meal == nb_philos)
+		&& nb_philos != 0)
 	{
 		i = 0;
 		pthread_mutex_lock(&(infos->check_last_meal));
-		while (i < nb_philos && infos->valid_infos == 0)
+		while (i < nb_philos && infos->valid_infos != 1)
 		{
-			if (get_time(infos) - philo[i].time_last_meal >= infos->time_to_die)
+			if (get_time(infos) - philo[i].time_last_meal >= infos->time_to_die
+				&& philo[i].philo_status != DONE)
 			{
 				infos->valid_infos = 1;
 				philo_died(philo, infos);
@@ -69,10 +71,17 @@ int	ft_thread(t_philo *philo, int nb_philos)
 	pthread_t		*philo_thread;
 
 	if (ft_pthread_mutex_init(philo[0].infos) != 0)
+	{
+		philo[0].infos->infos_ft = -8;
 		return (1);
+	}
 	philo_thread = malloc(sizeof(pthread_t) * (size_t)nb_philos);
 	if (!philo_thread)
+	{
+		ft_pthread_mutex_destroy(philo[0].infos);
+		philo[0].infos->infos_ft = -8;
 		return (error_msg(4, "malloc error", 0));
+	}
 	init_thread(philo, nb_philos, philo_thread);
 	ft_pthread_mutex_destroy(philo[0].infos);
 	free(philo_thread);

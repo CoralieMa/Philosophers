@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:22:02 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/25 10:42:52 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:53:17 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long	get_last_time(void)
 	return ((tv.tv_usec / 1000) + (tv.tv_sec * 1000));
 }
 
-void	ft_msleep(t_philo *philo, t_infos *infos, int ms)
+void	ft_msleep(t_infos *infos, int ms)
 {
 	long	target_time;
 	long	last_time;
@@ -29,7 +29,6 @@ void	ft_msleep(t_philo *philo, t_infos *infos, int ms)
 	if (last_time == -1)
 		return ;
 	target_time = last_time + ms;
-	(void)philo;
 	while (last_time < target_time && infos->valid_infos != 1)
 	{
 		last_time = get_last_time();
