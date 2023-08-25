@@ -9,7 +9,8 @@ FILES	= philo \
 				threads \
 				routine \
 				initialise \
-				verification_input \
+				input_verification \
+				phtread_function_error
 
 
 SRCS	= ${addprefix SRCS/, $(addsuffix .c, $(FILES))}

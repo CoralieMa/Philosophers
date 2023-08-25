@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 11:01:45 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/21 13:02:59 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:29:24 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,56 @@ void	unlock_forks(t_infos *infos)
 	}
 }
 
-void	ft_pthread_mutex_destroy(t_infos *infos)
+int	ft_pthread_mutex_destroy(t_infos *infos)
 {
 	int	i;
+	int	return_value;
 
 	i = 0;
-	pthread_mutex_destroy(&infos->msg);
+	return_value = pthread_mutex_destroy(&infos->msg);
+	if (return_value != 0)
+	{
+		printf("Error in mutex destruction\n");
+		return (return_value);
+	}
 	while (i < infos->number_of_philosophers)
 	{
 		pthread_mutex_destroy(&infos->forks[i]);
+		if (return_value != 0)
+		{
+			printf("Error in mutex destruction\n");
+			return (return_value);
+		}
 		++i;
 	}
+	return (0);
 }
 
-void	ft_pthread_mutex_init(t_infos *infos)
+int	ft_pthread_mutex_init(t_infos *infos)
 {
 	int	i;
+	int	return_value;
 
 	i = 0;
-	pthread_mutex_init(&infos->msg, NULL);
+	return_value = pthread_mutex_init(&infos->msg, NULL);
+	if (return_value != 0)
+	{
+		printf("Error in initializing mutex\n");
+		infos->infos_ft = -8;
+		infos->valid_infos = 1;
+		return (return_value);
+	}
 	while (i < infos->number_of_philosophers)
 	{
-		pthread_mutex_init(&infos->forks[i], NULL);
+		return_value = pthread_mutex_init(&infos->forks[i], NULL);
+		if (return_value != 0)
+		{
+			printf("Error in initializing mutex\n");
+			infos->valid_infos = 1;
+			infos->infos_ft = -8;
+			return (return_value);
+		}
 		++i;
 	}
+	return (0);
 }

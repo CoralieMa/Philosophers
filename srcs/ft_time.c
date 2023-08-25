@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:22:02 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/14 12:14:23 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:42:52 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,15 @@ void	ft_msleep(t_philo *philo, t_infos *infos, int ms)
 	long	last_time;
 
 	last_time = get_last_time();
+	if (last_time == -1)
+		return ;
 	target_time = last_time + ms;
 	(void)philo;
 	while (last_time < target_time && infos->valid_infos != 1)
 	{
 		last_time = get_last_time();
+		if (last_time == -1)
+			return ;
 		usleep(100);
 	}
 }

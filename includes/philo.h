@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 11:20:39 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/16 09:25:59 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:31:08 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 typedef struct s_infos
 {
 	atomic_int					valid_infos;
+	int							infos_ft;
 	int							number_of_philosophers;
 	int							number_of_times_each_philosopher_must_eat;
 	long						begin_time;
@@ -55,24 +56,26 @@ int		ft_isdigit(char c);
 int		ft_atoi(const char *str);
 int		error_msg(int type, char *msg, int i);
 int		input_not_valid(int argc, char **argv);
+int		ft_pthread_mutex_init(t_infos *infos);
+int		ft_pthread_mutex_destroy(t_infos *infos);
 int		ft_thread(t_philo *philo, int nb_philos);
 int		verification_dead(t_philo *philo, t_infos *infos);
+int		pthread_create_error(t_philo *philo, pthread_t *philo_th, int i);
 long	get_last_time(void);
 long	get_time(t_infos *infos);
 void	unlock_forks(t_infos *infos);
-void	*routine(void *arg);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	get_time_beginning(t_infos *infos);
-void	ft_pthread_mutex_init(t_infos *infos);
 void	eating(t_philo *philo, t_infos *infos);
 void	sleeping(t_philo *philo, t_infos *infos);
-void	ft_pthread_mutex_destroy(t_infos *infos);
+void	pthread_join_error(t_infos *infos, int i);
 void	taking_forks(t_philo *philo, t_infos *infos);
 void	returning_fork(t_philo *philo, t_infos *infos);
 void	ft_free_struct(t_infos *infos, t_philo *philos);
 void	ft_msleep(t_philo *philo, t_infos *infos, int ms);
 void	print_msg(t_philo *philo, t_infos *infos, char *msg);
+void	*routine(void *arg);
 t_philo	*initialise_data(int argc, char **argv, t_infos *infos);
 
 #endif

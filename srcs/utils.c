@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:23:41 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/14 13:35:02 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:44:41 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 void	ft_free_struct(t_infos *infos, t_philo *philos)
 {
-	int	i;
-
 	free(infos->forks);
 	free(philos);
-	i = 0;
 }
 
 static int	ft_strlen(const char *s)

@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:37:03 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/16 09:29:46 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:33:11 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ void	*routine(void *arg)
 	if (philo->infos->number_of_philosophers < 2)
 		return (exeption(philo, infos));
 	if (philo->philo_nb % 2 != 0)
-	{
 		ft_msleep(philo, infos, infos->time_to_eat / 2);
-	}
 	while (infos->valid_infos == 0 && philo->philo_status != DONE)
 		loop_routine(philo, infos);
 	infos->valid_infos = 1;
