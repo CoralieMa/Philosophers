@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 09:14:39 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/25 11:16:00 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:02:20 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,6 @@ static int	input_not_numeric(int argc, char **argv)
 
 int	input_not_valid(int argc, char **argv)
 {
-	int	i;
-	int	valid;
-
-	i = 1;
-	valid = 1;
 	if (argc < 5)
 		return (error_msg(1, "Too few arguments\n", 0));
 	if (argc > 6)

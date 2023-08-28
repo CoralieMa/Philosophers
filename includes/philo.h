@@ -6,7 +6,7 @@
 /*   By: cmartino <cmartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 11:20:39 by cmartino          #+#    #+#             */
-/*   Updated: 2023/08/25 16:14:22 by cmartino         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:51:39 by cmartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int		ft_atoi(const char *str);
 int		error_msg(int type, char *msg, int i);
 int		input_not_valid(int argc, char **argv);
 int		ft_pthread_mutex_init(t_infos *infos);
-int		ft_pthread_mutex_destroy(t_infos *infos);
 int		ft_thread(t_philo *philo, int nb_philos);
 int		verification_dead(t_philo *philo, t_infos *infos);
 int		pthread_create_error(t_philo *philo, pthread_t *philo_th, int i);
@@ -70,6 +69,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	get_time_beginning(t_infos *infos);
 void	eating(t_philo *philo, t_infos *infos);
 void	sleeping(t_philo *philo, t_infos *infos);
+void	ft_pthread_mutex_destroy(t_infos *infos);
 void	pthread_join_error(t_infos *infos, int i);
 void	taking_forks(t_philo *philo, t_infos *infos);
 void	returning_fork(t_philo *philo, t_infos *infos);
